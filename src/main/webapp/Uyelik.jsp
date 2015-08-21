@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="Member" class="entity.Member"></jsp:useBean>
+        <jsp:useBean id="Member" class="Model.User"></jsp:useBean>
             <form action="Uyelik.jsp" name="uyeForm" method="post">
                 <table>
                     <tr>
