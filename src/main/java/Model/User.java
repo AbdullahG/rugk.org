@@ -12,7 +12,6 @@ package Model;
 public class User {
 
     int ID;
-    static int idGenerator = 0;
     String userName = "";
     String password = "";
     String name = "";
@@ -23,13 +22,22 @@ public class User {
     String department = "";
     String grade = "";
     String status = "";
+    RepoService repoService = new RepoServiceImp();
 
+    public RepoService getRepoService() {
+        return repoService;
+    }
+
+    public void setRepoService(RepoService repoService) {
+        this.repoService = repoService;
+    }
+    
     public int getID() {
         return ID;
     }
 
     public void setID(int iD) {
-        ID = ++idGenerator;
+    this.ID=iD;
     }
 
     public String getName() {
@@ -96,13 +104,6 @@ public class User {
         this.status = status;
     }
 
-    public static int getIdGenerator() {
-        return idGenerator;
-    }
-
-    public static void setIdGenerator(int idGenerator) {
-        User.idGenerator = idGenerator;
-    }
 
     public String getUserName() {
         return userName;
@@ -130,8 +131,28 @@ public class User {
         }
     }
 
-    public void registerToDB() {
-
+    public String registerToDB() {
+        User user = new User();
+        user.setName(name);
+        user.setSurName(surName);
+        user.setEmail(email);
+        user.setGsm(gsm);
+        user.setDepartment(department);
+        user.setFaculty(faculty);
+        user.setGrade(grade);
+        user.setID(ID);
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setStatus("activeForAWeek");
+        if(repoService.registerUser(user))
+        {
+            return "Üye olma işleminiz başarıyla tamamlandı.";
+        }
+        else
+            return "Geçici bir hata oluştu, lütfen daha sonra tekrar deneyin.";
+        
+        //SESSION SET EDILECEK
+        
     }
 
 }

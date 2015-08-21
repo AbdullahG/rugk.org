@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="Member" class="Model.User"></jsp:useBean>
+        <jsp:useBean id="User" class="Model.User"></jsp:useBean>
             <form action="Uyelik.jsp" name="uyeForm" method="post">
                 <table>
                     <tr>
@@ -51,9 +51,9 @@
 
             </form>
 
-        <jsp:setProperty name="Member" property="*" />
-        <%if (Member.validate()) {
-                out.println("Üyelik işleminiz tamamlandı, anasayfaya yönlendiriliyorsunuz..");
+        <jsp:setProperty name="User" property="*" />
+        <%if (User.validate()) {
+                out.println(User.registerToDB()+", anasayfaya yönlendiriliyorsunuz..");
                 response.setHeader("Refresh", "2.2;url=index.html"); // 2.2 sn sonra index.jsp'e yönlendir.
             } else if (request.getParameter("submit") != null) {
                 out.println("Tüm alanları eksiksiz doldurunuz!");

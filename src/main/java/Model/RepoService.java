@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -13,8 +14,9 @@ import java.util.List;
  * @author MuhammedAbdullah
  */
 public interface RepoService {
+    public Connection connectToDB();
     
-    public ResultSet executeQuery(String query);
+    public Object executeQuery(String query);
     
     public List<User> getUserList();
     
