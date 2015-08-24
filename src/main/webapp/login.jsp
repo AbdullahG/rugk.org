@@ -12,6 +12,7 @@
         <title>Üye Girişi</title>
     </head>
     <body>
+        <%@include file="menu.jsp" %>
         <jsp:useBean id="User" class="Model.User"></jsp:useBean>
             <form action="login.jsp" name="loginForm" method="post">
                 <table>
@@ -34,10 +35,10 @@
                     {
                         //SESSION SET EDILECEK
                         out.println("Başarılı bir şekilde giriş yaptınız, anasayfaya yönlendiriliyorsunuz..");
-                        response.setHeader("Refresh", "2.2;url=index.html"); // 2.2 sn sonra index.jsp'e yönlendir.
+                        response.setHeader("Refresh", "2.2;url=index.jsp"); // 2.2 sn sonra index.jsp'e yönlendir.
                     }
                     else
-                        out.println("Kullanıcı adı yada şifrenizi yanlış girdiniz!");
+                        out.println("Kullanıcı adı yada şifre hatalı!");
                 }
                 %>
     </body>
