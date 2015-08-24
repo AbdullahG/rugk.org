@@ -122,7 +122,7 @@ public class User {
     }
 
     public boolean validate() {
-        if ((name != null && !name.equals("")) && (surName != null && !surName.equals(""))
+        if (userName!=null && !userName.equals("") && (password!=null && !password.equals("") && name != null && !name.equals("")) && (surName != null && !surName.equals(""))
                 && (faculty != null && !faculty.equals("")) && (department != null && !department.equals(""))
                 && (gsm != null && !gsm.equals("")) && (email != null && !email.equals(""))) {
             return true;
