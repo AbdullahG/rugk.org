@@ -12,10 +12,13 @@
         <title>Üye Ol</title>
     </head>
     <body>
+        
         <%@include file="menu.jsp" %>
         <jsp:useBean id="User" class="Model.User"></jsp:useBean>
+        
             <form action="Uyelik.jsp" name="uyeForm" method="post">
                 <table>
+                    <tr>
                     <td>Kullanıcı Adı: </td>
                     <td><input type="text" name="userName" /></td>
                     </tr>

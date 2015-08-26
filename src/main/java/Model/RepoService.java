@@ -6,7 +6,7 @@
 package Model;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,6 +14,7 @@ import java.util.List;
  * @author MuhammedAbdullah
  */
 public interface RepoService {
+    
     public Connection connectToDB();
     
     public Object executeQuery(String query);
@@ -28,6 +29,6 @@ public interface RepoService {
     
     public void rememberPassword(String email);
     
-    
+    public HashMap getCategories();
     
 }

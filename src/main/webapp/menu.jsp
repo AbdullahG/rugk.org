@@ -15,7 +15,9 @@
             <table>
                 <tr>
                     <td>
-                        <img src="https://lh3.googleusercontent.com/-YtAbWnBFhpQ/AAAAAAAAAAI/AAAAAAAAABo/09ZlAT9GvaQ/photo.jpg?sz=50" alt="asd"/>
+                        <a href="index.jsp">
+                            <img src="https://lh3.googleusercontent.com/-YtAbWnBFhpQ/AAAAAAAAAAI/AAAAAAAAABo/09ZlAT9GvaQ/photo.jpg?sz=50" alt="asd"/>
+                        </a>
                     </td>
                     <td>
                         Yıldırım Beyazıt Üniversitesi<br/>

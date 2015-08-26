@@ -91,6 +91,5 @@ public class Post {
         public void setCommentText(String commentText) {
             this.commentText = commentText;
         }
-
     }
 }

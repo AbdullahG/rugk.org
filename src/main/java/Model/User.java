@@ -22,7 +22,16 @@ public class User {
     String department = "";
     String grade = "";
     String status = "";
+    String auth = "";
     RepoService repoService = new RepoServiceImp();
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
 
     public RepoService getRepoService() {
         return repoService;
@@ -31,13 +40,13 @@ public class User {
     public void setRepoService(RepoService repoService) {
         this.repoService = repoService;
     }
-    
+
     public int getID() {
         return ID;
     }
 
     public void setID(int iD) {
-    this.ID=iD;
+        this.ID = iD;
     }
 
     public String getName() {
@@ -104,7 +113,6 @@ public class User {
         this.status = status;
     }
 
-
     public String getUserName() {
         return userName;
     }
@@ -122,12 +130,21 @@ public class User {
     }
 
     public boolean validate() {
-        if (userName!=null && !userName.equals("") && (password!=null && !password.equals("") && name != null && !name.equals("")) && (surName != null && !surName.equals(""))
+        if (userName != null && !userName.equals("") && (password != null && !password.equals("") && name != null && !name.equals("")) && (surName != null && !surName.equals(""))
                 && (faculty != null && !faculty.equals("")) && (department != null && !department.equals(""))
                 && (gsm != null && !gsm.equals("")) && (email != null && !email.equals(""))) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public boolean checkInput(String input) {
+        if (input.contains("'") || input.contains("\"") || input.contains("<") || input.contains(">") || input.contains("\\") || input.contains("!")
+                || input.contains(" ") || input.contains(";") || input.contains(",") || input.contains("=")) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -144,15 +161,13 @@ public class User {
         user.setUserName(userName);
         user.setPassword(password);
         user.setStatus("activeForAWeek");
-        if(repoService.registerUser(user))
-        {
+        if (repoService.registerUser(user)) {
             return "Üye olma işleminiz başarıyla tamamlandı.";
-        }
-        else
+        } else {
             return "Geçici bir hata oluştu, lütfen daha sonra tekrar deneyin.";
-        
+        }
+
         //SESSION SET EDILECEK
-        
     }
 
 }

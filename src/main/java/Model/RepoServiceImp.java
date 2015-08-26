@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +32,7 @@ public class RepoServiceImp implements RepoService {
  // 
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url + dbName, username, password);
+            conn = DriverManager.getConnection(url + dbName+"?useUnicode=true&characterEncoding=UTF-8", username, password);
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -136,5 +137,23 @@ public class RepoServiceImp implements RepoService {
     public void rememberPassword(String email) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public HashMap getCategories() {
+    HashMap<Integer,String> hashmap = new HashMap<>();
+    String query = "SELECT * FROM rugk.categories";
+        ResultSet resultSet = (ResultSet)this.executeQuery(query);
+
+        try {
+            while (resultSet.next()) {
+                hashmap.put(resultSet.getInt("category_id"), resultSet.getString("category_name"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RepoServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return hashmap;
+    }
+    
+    
 
 }
