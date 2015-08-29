@@ -39,7 +39,6 @@ public class Post {
         this.category = category;
     }
 
-    
     public Post() {
     }
 
@@ -49,12 +48,12 @@ public class Post {
 
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
-        
+
         List<Category> list = repoService.getCategories();
-        for(Category category: list)
-        {
-            if(category.getID()==this.categoryID)
+        for (Category category : list) {
+            if (category.getID() == this.categoryID) {
                 this.setCategory(category);
+            }
         }
     }
 
@@ -137,81 +136,4 @@ public class Post {
 
     }
 
-    public String getCategoriesAsString() {
-        String temp = "";
-        List<Category> list= repoService.getCategories();
-        for (Category category : list) {
-            temp += " <option value=\"" + category.getID() + "\">" + category.getCategoryName() + "</option>";
-        }
-        return temp;
-    }
-
-    public boolean registerToDB(String templatePath) {
-        Post post = new Post();
-        post.setCategoryID(categoryID);
-        post.setPostHeader(postHeader);
-        post.setPostText(postText);
-
-        this.createPageForPost(post,templatePath);
-
-        return repoService.savePost(post);
-    }
-
-    public int getLastPostID() {
-        String query = "SELECT * FROM rugk.posts ORDER BY post_id DESC LIMIT 0,1";
-        ResultSet rSet = (ResultSet) repoService.executeQuery(query);
-        try {
-            if (rSet != null && rSet.next()) {
-                return rSet.getInt("post_id");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return -1;
-    }
-
-    public File createPageForPost(Post post, String templatePath) {
-
-        String pageName = "";
-        File folder = new File(templatePath);
-        folder.mkdir();
-        
-        
-        post.setPostID(this.getLastPostID() + 1);
-
-        pageName = postHeader.replaceAll("\\s", "-") + "-" + post.getPostID() + ".jsp";
-        System.out.println("Gelen yol: "+templatePath+" açılacak folder yolu: "+folder.getAbsolutePath());
-        File file = new File(folder.getAbsolutePath() + "\\" + pageName);
-        File pageTemplate = new File(templatePath+"\\pageTemplate.jsp");
-        System.out.println("Sayfa oluşturuldu: "+file.getAbsolutePath());
-        PrintWriter pw = null;
-        Scanner scanFile = null;
-
-        try {
-            scanFile = new Scanner(pageTemplate);
-            pw = new PrintWriter(file);
-            String tempStr;
-            while (scanFile.hasNext()) {
-                tempStr = scanFile.nextLine();
-                if (tempStr.trim().equals("<title>")) {
-                    pw.println(tempStr);
-                    pw.println("rugk.org - " + post.postHeader);
-                } else if (tempStr.trim().split(" ").length>0 && tempStr.trim().split(" ")[0].equals("<%@include")) {
-                    pw.println(tempStr);
-                    pw.println("<h3>"+post.postHeader+"</h3>");
-                    pw.print(post.postText);
-                    System.out.println("Posttext length: "+postText.length());
-                }
-                else
-                    pw.println(tempStr);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        pw.close();
-        scanFile.close();
-        
-        post.setPostText(templatePath + "\\" + pageName);
-        return file;
-    }
 }

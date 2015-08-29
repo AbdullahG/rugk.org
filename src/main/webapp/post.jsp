@@ -4,6 +4,7 @@
     Author     : MuhammedAbdullah
 --%>
 
+<%@page import="View.PostView"%>
 <%@page import="java.io.File"%>
 <%@page import="Model.RepoServiceImp"%>
 <%@page import="Model.RepoService"%>
@@ -19,9 +20,9 @@
 
         <%@include file="WEB-INF/menu.jsp" %>
 
-        <jsp:useBean id="Post" class="Model.Post"></jsp:useBean>
-        <% Post post = new Post();
-            post.getCategoriesAsString();
+        <jsp:useBean id="postBean" class="Model.Post"></jsp:useBean>
+        <jsp:useBean id="postViewBean" class="View.PostView"></jsp:useBean>
+        <% postViewBean.getCategoriesAsString();
         %>
         <form action="post.jsp" name="postForm" method="post">
             <table>
@@ -49,35 +50,35 @@
                     <td>
                         <select name="categoryID">
                             <option value="-1">Seçiniz</option>
-                            <% out.println(Post.getCategoriesAsString()); %>
+                            <% out.println(postViewBean.getCategoriesAsString()); %>
                         </select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Yayınla" name="postYayinla"/>
                     </td>
                 </tr>
             </table>
 
-            <jsp:setProperty name="Post" property="*"/>
+                            <jsp:setProperty name="postBean" property="*"/>
         </form>
         <%
             if (request.getParameter("postYayinla") != null) {
-                if (Post.getCategoryID()==-1 || Post.getCategoryID()==0) {
+                if (postBean.getCategoryID()==-1 || postBean.getCategoryID()==0) {
                     out.println("Kategori seçiniz.");
                 }
-                if (Post.getPostHeader().equals("")) {
+                if (postBean.getPostHeader().equals("")) {
                     out.println("Başlık giriniz.");
                 }
-                if (Post.getPostText().trim().equals("")) {
+                if (postBean.getPostText().trim().equals("")) {
                     out.println("Yazı alanına metin giriniz");
-                } else if (Post.getCategoryID()!=-1 && Post.getCategoryID()!=0 && !Post.getPostHeader().equals("") 
-                        && !Post.getPostText().equals("")) {
+                } else if (postBean.getCategoryID()!=-1 && postBean.getCategoryID()!=0 && !postBean.getPostHeader().equals("") 
+                        && !postBean.getPostText().equals("")) {
                     out.println("Yazı eklendi");
                     Post tempPost = new Post();
-                    tempPost.setCategoryID(Post.getCategoryID());
-                    tempPost.setPostHeader(Post.getPostHeader());
-                    tempPost.setPostHeader(Post.getPostHeader());
-                    
-                    if(tempPost.registerToDB(application.getRealPath("")))
-                        out.println("Post kaydedildi");
+                    tempPost.setCategoryID(postBean.getCategoryID());
+                    tempPost.setPostHeader(postBean.getPostHeader());
+                    tempPost.setPostText(postBean.getPostText());
+                    View.PostView postView = new PostView();
+                    if(postView.registerToDB(application.getRealPath(""), tempPost))
+                        out.println("Post kaydedildi. Görüntülemek için <a href=\""+tempPost.getPostText()+"\">Tıklayın</a>");
                     else
                         out.println("Bir hata oluştu, post kaydedilemedi");
                     

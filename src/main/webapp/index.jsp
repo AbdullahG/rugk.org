@@ -4,7 +4,10 @@
     Author     : MuhammedAbdullah
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.User"%>
+<%@page import="Model.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +17,7 @@
     </head>
     
     <body>
+        <jsp:useBean id="postViewBean" class="View.PostView"></jsp:useBean>
         <%@include file="WEB-INF/menu.jsp" %>
         <h1>Anasayfa</h1>
         <% 
@@ -35,5 +39,49 @@
         <%
         }
         %>
+        <div name="arge">
+            <h3>AR-GE</h3>
+            <%
+        List<Post> argeList = new ArrayList<Model.Post>();
+        argeList = postViewBean.getPostList("arge");
+        for(Post argeObj: argeList)
+        {
+            out.println("<a href=\""+argeObj.getPostText()+"\">"+argeObj.getPostHeader()+"</a> <br/>");
+        }
+        %>
+        </div>
+        <div name="haberler">
+            <h3>Haberler</h3>
+            <%
+        List<Model.Post> haberList = new ArrayList<Model.Post>();
+        haberList = postViewBean.getPostList("haber");
+        for(Post haberObj: haberList)
+        {
+            out.println("<a href=\""+haberObj.getPostText()+"\">"+haberObj.getPostHeader()+"</a> <br/>");
+        }
+        %>
+        </div>
+        <div name="Duyurular">
+            <h3>Duyurular</h3>
+            <%
+        List<Post> duyuruList = new ArrayList<Post>();
+        duyuruList = postViewBean.getPostList("duyuru");
+        for(Post duyuruObj: duyuruList)
+        {
+            out.println("<a href=\""+duyuruObj.getPostText()+"\">"+duyuruObj.getPostHeader()+"</a> <br/>");
+        }
+        %>
+        </div>
+        <div name="galeri">
+            <h3>Galeri</h3>
+            <%
+        List<Model.Post> galeriList = new ArrayList<Model.Post>();
+        galeriList = postViewBean.getPostList("galeri");
+        for(Post galeriObj: galeriList)
+        {
+            out.println("<a href=\""+galeriObj.getPostText()+"\">"+galeriObj.getPostHeader()+"</a> <br/>");
+        }
+        %>
+        </div>
     </body>
 </html>

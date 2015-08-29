@@ -14,7 +14,7 @@
     <body>
         
         <%@include file="WEB-INF/menu.jsp" %>
-        <jsp:useBean id="User" class="Model.User"></jsp:useBean>
+        <jsp:useBean id="userBean" class="Model.User"></jsp:useBean>
         
             <form action="Uyelik.jsp" name="uyeForm" method="post">
                 <table>
@@ -63,11 +63,11 @@
 
             </form>
 
-        <jsp:setProperty name="User" property="*" />
-        <%if (User.validate()) {
-                String registrationMsg = User.registerToDB();
+        <jsp:setProperty name="userBean" property="*" />
+        <%if (userBean.validate()) {
+                String registrationMsg = userBean.registerToDB();
                 out.println(registrationMsg + ", anasayfaya yönlendiriliyorsunuz..");
-                response.setHeader("Refresh", "2.2;url=index.jsp"); // 2.2 sn sonra index.jsp'e yönlendir.
+                response.setHeader("Refresh", "0;url=index.jsp"); // 0 sn sonra index.jsp'e yönlendir.
             } else if (request.getParameter("submit") != null) {
                 out.println("Tüm alanları eksiksiz doldurunuz!");
             }

@@ -29,7 +29,7 @@
             }
             %>
             <%@include file="WEB-INF/menu.jsp" %>
-        <jsp:useBean id="User" class="Model.User"></jsp:useBean>
+        <jsp:useBean id="userBean" class="Model.User"></jsp:useBean>
             <form action="login.jsp" name="loginForm" method="post">
                 <table>
                     <tr>
@@ -45,12 +45,13 @@
                     </tr>
                 </table>
             </form>
-            <jsp:setProperty name="User" property="*" />
+            <jsp:setProperty name="userBean" property="*" />
             <%
-                if(User.getUserName()!=null && !User.getUserName().equals("") && User.getPassword()!=null && !User.getPassword().equals(""))
+                if(userBean.getUserName()!=null && !userBean.getUserName().equals("") && userBean.getPassword()!=null 
+                        && !userBean.getPassword().equals(""))
                 {
                     User userTemp = null;
-                    if((userTemp = User.getRepoService().loginUser(User.getUserName(), User.getPassword()))!=null)
+                    if((userTemp = userBean.getRepoService().loginUser(userBean.getUserName(), userBean.getPassword()))!=null)
                     {
                         //SESSION SET EDILECEK
                         HttpSession sessionObj = request.getSession();
@@ -77,7 +78,7 @@
                         }
                         
                         out.println("Başarılı bir şekilde giriş yaptınız, anasayfaya yönlendiriliyorsunuz..");
-                        response.setHeader("Refresh", "2.2;url=index.jsp"); // 2.2 sn sonra index.jsp'e yönlendir.
+                        response.setHeader("Refresh", "0;url=index.jsp"); // 0 sn sonra index.jsp'ye yönlendir.
                     }
                     else
                         out.println("Kullanıcı adı yada şifre hatalı!");
