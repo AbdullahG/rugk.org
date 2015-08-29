@@ -28,7 +28,7 @@
                         this.passwordForCookie = cookie.getValue();
             }
             %>
-        <%@include file="menu.jsp" %>
+            <%@include file="WEB-INF/menu.jsp" %>
         <jsp:useBean id="User" class="Model.User"></jsp:useBean>
             <form action="login.jsp" name="loginForm" method="post">
                 <table>

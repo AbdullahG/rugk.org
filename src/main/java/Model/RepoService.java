@@ -29,6 +29,7 @@ public interface RepoService {
     
     public void rememberPassword(String email);
     
-    public HashMap getCategories();
+    public List<Category> getCategories();
     
+    public boolean savePost(Post post);
 }

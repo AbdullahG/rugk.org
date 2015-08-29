@@ -13,7 +13,7 @@
     </head>
     <body>
         
-        <%@include file="menu.jsp" %>
+        <%@include file="WEB-INF/menu.jsp" %>
         <jsp:useBean id="User" class="Model.User"></jsp:useBean>
         
             <form action="Uyelik.jsp" name="uyeForm" method="post">

@@ -14,7 +14,7 @@
     </head>
     
     <body>
-        <%@include file="menu.jsp" %>
+        <%@include file="WEB-INF/menu.jsp" %>
         <h1>Anasayfa</h1>
         <% 
         if(request.getSession().getAttribute("userObject")!=null)

@@ -139,21 +139,36 @@ public class RepoServiceImp implements RepoService {
     }
 
     @Override
-    public HashMap getCategories() {
-    HashMap<Integer,String> hashmap = new HashMap<>();
+    public List<Category> getCategories() {
+    List<Category> categoryList = new ArrayList<>();
+    
     String query = "SELECT * FROM rugk.categories";
         ResultSet resultSet = (ResultSet)this.executeQuery(query);
 
         try {
+            Category tempCategory=null;
             while (resultSet.next()) {
-                hashmap.put(resultSet.getInt("category_id"), resultSet.getString("category_name"));
+                tempCategory=new Category();
+                tempCategory.setID(resultSet.getInt("category_id"));
+                tempCategory.setCategoryName(resultSet.getString("category_name"));
+                categoryList.add(tempCategory);
             }
         } catch (SQLException ex) {
+            System.out.println("BURADA");
+            ex.printStackTrace();
             Logger.getLogger(RepoServiceImp.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return hashmap;
+    return categoryList;
     }
     
-    
+    @Override
+    public boolean savePost(Post post)
+    {
+        String query="INSERT INTO rugk.posts (post_header, post_category_id, post_text_filename) VALUES ('"+post.getPostHeader()+"', "+post.getCategoryID()+", '"+post.getPostText()+"')";
+        if((int)executeQuery(query)>0)
+            return true;
+        else
+            return false;
+    }
 
 }

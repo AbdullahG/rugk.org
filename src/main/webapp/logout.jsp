@@ -12,7 +12,7 @@
         <title>Çıkış</title>
     </head>
     <body>
-        <%@include file="menu.jsp" %>
+        <%@include file="WEB-INF/menu.jsp" %>
         
         <b>
             <%
