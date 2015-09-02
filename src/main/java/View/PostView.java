@@ -12,6 +12,7 @@ import Model.RepoServiceImp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -77,7 +78,12 @@ public class PostView {
 
         try {
             scanFile = new Scanner(pageTemplate);
-            pw = new PrintWriter(file);
+            try {
+                pw = new PrintWriter(file, "UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(PostView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             String tempStr;
             while (scanFile.hasNext()) {
                 tempStr = scanFile.nextLine();

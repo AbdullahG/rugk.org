@@ -39,44 +39,54 @@
         <%
         }
         %>
-        <div name="arge">
+        <div name="arge" align="center">
             <h3>AR-GE</h3>
             <%
+        List<Post> allPosts = postViewBean.getPostList("");
+        
         List<Post> argeList = new ArrayList<Model.Post>();
-        argeList = postViewBean.getPostList("arge");
+        List<Post> haberList = new ArrayList<Model.Post>();
+        List<Post> galeriList = new ArrayList<Model.Post>();
+        List<Post> duyuruList = new ArrayList<Model.Post>();
+        for(Post tPost: allPosts)
+        {
+            if(tPost.getCategory().getCategoryName().equals("arge"))
+                argeList.add(tPost);
+            else if(tPost.getCategory().getCategoryName().equals("duyuru"))
+                duyuruList.add(tPost);
+            else if(tPost.getCategory().getCategoryName().equals("galeri"))
+                galeriList.add(tPost);
+            else if(tPost.getCategory().getCategoryName().equals("haber"))
+                haberList.add(tPost);
+        }
+        
         for(Post argeObj: argeList)
         {
             out.println("<a href=\""+argeObj.getPostText()+"\">"+argeObj.getPostHeader()+"</a> <br/>");
         }
         %>
         </div>
-        <div name="haberler">
+        <div name="haberler" align="center">
             <h3>Haberler</h3>
             <%
-        List<Model.Post> haberList = new ArrayList<Model.Post>();
-        haberList = postViewBean.getPostList("haber");
         for(Post haberObj: haberList)
         {
             out.println("<a href=\""+haberObj.getPostText()+"\">"+haberObj.getPostHeader()+"</a> <br/>");
         }
         %>
         </div>
-        <div name="Duyurular">
+        <div name="Duyurular" align="center">
             <h3>Duyurular</h3>
             <%
-        List<Post> duyuruList = new ArrayList<Post>();
-        duyuruList = postViewBean.getPostList("duyuru");
         for(Post duyuruObj: duyuruList)
         {
             out.println("<a href=\""+duyuruObj.getPostText()+"\">"+duyuruObj.getPostHeader()+"</a> <br/>");
         }
         %>
         </div>
-        <div name="galeri">
+        <div name="galeri" align="center">
             <h3>Galeri</h3>
             <%
-        List<Model.Post> galeriList = new ArrayList<Model.Post>();
-        galeriList = postViewBean.getPostList("galeri");
         for(Post galeriObj: galeriList)
         {
             out.println("<a href=\""+galeriObj.getPostText()+"\">"+galeriObj.getPostHeader()+"</a> <br/>");

@@ -6,12 +6,25 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% request.setCharacterEncoding("UTF-8"); %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            h3{
+                color: #333366;
+            }
+            body{
+                background-color: #58D3F7;
+            }
+            div{
+                background-color: #00BFFF;
+            }
+        </style>
     </head>
     <body>
-        <div>
+        
+        <div style="background-color: #006699">
             <table>
                 <tr>
                     <td>
