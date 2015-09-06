@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Controller.RepoServiceImp;
+import Controller.RepoService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

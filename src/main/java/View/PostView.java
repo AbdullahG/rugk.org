@@ -7,8 +7,8 @@ package View;
 
 import Model.Category;
 import Model.Post;
-import Model.RepoService;
-import Model.RepoServiceImp;
+import Controller.RepoService;
+import Controller.RepoServiceImp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
+import Model.Category;
+import Model.Post;
+import Model.User;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;

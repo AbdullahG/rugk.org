@@ -6,8 +6,8 @@
 
 <%@page import="View.PostView"%>
 <%@page import="java.io.File"%>
-<%@page import="Model.RepoServiceImp"%>
-<%@page import="Model.RepoService"%>
+<%@page import="Controller.RepoServiceImp"%>
+<%@page import="Controller.RepoService"%>
 <%@page import="Model.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

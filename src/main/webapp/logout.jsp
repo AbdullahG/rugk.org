@@ -13,13 +13,14 @@
     </head>
     <body>
         <%@include file="WEB-INF/menu.jsp" %>
-        
+
         <b>
-            <%
-            request.getSession().invalidate();
-            out.println("Çıkış yaptınız, anasayfaya yönlendiriliyorsunuz..");
-                        response.setHeader("Refresh", "2;url=index.jsp"); // 2 sn sonra index.jsp'e yönlendir.
-            %>
+            <%                request.getSession().invalidate();
+                out.println("Çıkış yaptınız, anasayfaya yönlendiriliyorsunuz..");
+                response.setHeader("Refresh", "2;url=index.jsp"); // 2 sn sonra index.jsp'e yönlendir.
+%>
         </b>
+
+        <%@include file="WEB-INF/altMenu.jsp" %>
     </body>
 </html>

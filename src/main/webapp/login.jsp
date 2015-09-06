@@ -13,76 +13,73 @@
         <title>Üye Girişi</title>
     </head>
     <body>
-        <%!String userNameForCookie="", passwordForCookie=""; %>
+        <%!String userNameForCookie = "", passwordForCookie = ""; %>
         <%
-            
+
             Cookie[] cookies = request.getCookies();
-            if(cookies!=null)
-            for(int i=0; i<cookies.length; i++)
-            {
-                Cookie cookie = cookies[i];
-                if(cookie.getName().equals("userName"))
-                    this.userNameForCookie = cookie.getValue();
-                else
-                    if(cookie.getName().equals("password"))
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    Cookie cookie = cookies[i];
+                    if (cookie.getName().equals("userName")) {
+                        this.userNameForCookie = cookie.getValue();
+                    } else if (cookie.getName().equals("password")) {
                         this.passwordForCookie = cookie.getValue();
+                    }
+                }
             }
-            %>
-            <%@include file="WEB-INF/menu.jsp" %>
+        %>
+        <%@include file="WEB-INF/menu.jsp" %>
         <jsp:useBean id="userBean" class="Model.User"></jsp:useBean>
             <form action="login.jsp" name="loginForm" method="post">
                 <table>
                     <tr>
                         <td>Kullanıcı Adı/E-Posta: </td>
                         <td><input type="text" name="userName" value="<%=this.userNameForCookie%>" /></td>
-                    </tr>
-                    <tr>
-                        <td>Şifre: </td>
-                        <td><input type="password" name="password" value = "<%=this.passwordForCookie%>" /></input></td>
-                    </tr>
-                    <tr><td><input type="checkbox" name="remember" value="rememberChecked" checked/>Beni Hatırla</td>
-                        <td><input type="submit" name="loginSubmit" value="Giriş"/></td>
-                    </tr>
-                </table>
-            </form>
-            <jsp:setProperty name="userBean" property="*" />
-            <%
-                if(userBean.getUserName()!=null && !userBean.getUserName().equals("") && userBean.getPassword()!=null 
-                        && !userBean.getPassword().equals(""))
-                {
-                    User userTemp = null;
-                    if((userTemp = userBean.getRepoService().loginUser(userBean.getUserName(), userBean.getPassword()))!=null)
-                    {
-                        //SESSION SET EDILECEK
-                        HttpSession sessionObj = request.getSession();
-                        sessionObj.setAttribute("userObject", userTemp);
-                        
-                        if(request.getParameter("remember")!=null)
-                        {
-                            Cookie cookie = new Cookie("userName", userTemp.getUserName());
-                            cookie.setMaxAge(2600000); // 1 ay süreli cookie
-                            response.addCookie(cookie);
-                            cookie = new Cookie("password", userTemp.getPassword());
-                            cookie.setMaxAge(2600000);
-                            
-                            response.addCookie(cookie);
-                        }
-                        else
-                        {
-                            Cookie cookie = new Cookie("userName", "");
-                            cookie.setMaxAge(2600000); // 1 ay süreli cookie
-                            response.addCookie(cookie);
-                            cookie = new Cookie("password", "");
-                            cookie.setMaxAge(2600000);
-                            response.addCookie(cookie);
-                        }
-                        
-                        out.println("Başarılı bir şekilde giriş yaptınız, anasayfaya yönlendiriliyorsunuz..");
-                        response.setHeader("Refresh", "0;url=index.jsp"); // 0 sn sonra index.jsp'ye yönlendir.
+                </tr>
+                <tr>
+                    <td>Şifre: </td>
+                    <td><input type="password" name="password" value = "<%=this.passwordForCookie%>" /></input></td>
+                </tr>
+                <tr><td><input type="checkbox" name="remember" value="rememberChecked" checked/>Beni Hatırla</td>
+                    <td><input type="submit" name="loginSubmit" value="Giriş"/></td>
+                </tr>
+            </table>
+        </form>
+        <jsp:setProperty name="userBean" property="*" />
+        <%
+            if (userBean.getUserName() != null && !userBean.getUserName().equals("") && userBean.getPassword() != null
+                    && !userBean.getPassword().equals("")) {
+                User userTemp = null;
+                if ((userTemp = userBean.getRepoService().loginUser(userBean.getUserName(), userBean.getPassword())) != null) {
+                    //SESSION SET EDILECEK
+                    HttpSession sessionObj = request.getSession();
+                    sessionObj.setAttribute("userObject", userTemp);
+
+                    if (request.getParameter("remember") != null) {
+                        Cookie cookie = new Cookie("userName", userTemp.getUserName());
+                        cookie.setMaxAge(2600000); // 1 ay süreli cookie
+                        response.addCookie(cookie);
+                        cookie = new Cookie("password", userTemp.getPassword());
+                        cookie.setMaxAge(2600000);
+
+                        response.addCookie(cookie);
+                    } else {
+                        Cookie cookie = new Cookie("userName", "");
+                        cookie.setMaxAge(2600000); // 1 ay süreli cookie
+                        response.addCookie(cookie);
+                        cookie = new Cookie("password", "");
+                        cookie.setMaxAge(2600000);
+                        response.addCookie(cookie);
                     }
-                    else
-                        out.println("Kullanıcı adı yada şifre hatalı!");
+
+                    out.println("Başarılı bir şekilde giriş yaptınız, anasayfaya yönlendiriliyorsunuz..");
+                    response.setHeader("Refresh", "0;url=index.jsp"); // 0 sn sonra index.jsp'ye yönlendir.
+                } else {
+                    out.println("Kullanıcı adı yada şifre hatalı!");
                 }
-                %>
+            }
+        %>
+
+        <%@include file="WEB-INF/altMenu.jsp" %>
     </body>
 </html>

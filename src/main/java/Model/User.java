@@ -5,6 +5,9 @@
  */
 package Model;
 
+import Controller.RepoServiceImp;
+import Controller.RepoService;
+
 /**
  *
  * @author MuhammedAbdullah
