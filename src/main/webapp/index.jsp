@@ -100,6 +100,6 @@
                 </a>
             </div>
         </div>
-        <%@include file="WEB-INF/altMenu.jsp" %>
+                    <%@include file="WEB-INF/altMenu.jsp" %>
     </body>
 </html>

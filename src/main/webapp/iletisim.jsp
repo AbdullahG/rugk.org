@@ -32,10 +32,6 @@
         <div class="jumbotron jumbotron-sm">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-12">
-                        <h1 class="h1">
-                            Contact us <small>Feel free to contact us</small></h1>
-                    </div>
                 </div>
             </div>
         </div>
@@ -88,7 +84,7 @@
                 </div>
                 <div class="col-md-4">
                     <form>
-                        <legend><span class="glyphicon glyphicon-globe"></span>Neredeyiz?</legend>
+                        <legend><span class="glyphicon glyphicon-globe"></span>Ankara/Turkey</legend>
                         <address>
                             <strong>Robotik Uygulama ve Geliştirme Kulübü</strong><br>
                             Yıldırım Beyazıt Üniversitesi<br>
