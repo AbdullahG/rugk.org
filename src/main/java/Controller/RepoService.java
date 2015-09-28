@@ -35,4 +35,6 @@ public interface RepoService {
     public List<Category> getCategories();
     
     public boolean savePost(Post post);
+    
+    public List<Model.Faculty> getFaculties();
 }

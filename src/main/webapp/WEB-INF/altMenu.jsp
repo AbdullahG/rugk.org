@@ -47,18 +47,18 @@
                             <div class="col-md-4">
                                 <div class="row contact row-first">
                                     <div class="col-md-6">
-                                        <a href="http://www.jquery2dotnet.com" class="facebook"><i class="fa fa-facebook"></i>facebook</a>
+                                        <a href="http://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i>facebook</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="http://www.jquery2dotnet.com" class="instagram"><i class="fa fa-instagram"></i>Instagram</a>
+                                        <a href="http://www.instagram.com" class="instagram"><i class="fa fa-instagram"></i>Instagram</a>
                                     </div>
                                 </div>
                                 <div class="row contact">
                                     <div class="col-md-6">
-                                        <a href="http://www.jquery2dotnet.com" class="linkedin"><i class="fa fa-linkedin"></i>Linkedin</a>
+                                        <a href="http://www.linkedin.com" class="linkedin"><i class="fa fa-linkedin"></i>Linkedin</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="http://www.jquery2dotnet.com" class="twitter"><i class="fa fa-twitter"></i>Twitter</a>
+                                        <a href="http://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i>Twitter</a>
                                     </div>
                                 </div>
                             </div>

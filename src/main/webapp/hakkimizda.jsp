@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Hakkımızda</title>
         <%@include file="WEB-INF/menu.jsp" %>
     </head>
     <body>
+        <div class="container">
         <h3>Biz Kimiz?</h3>
         <p>Yıldırım Beyazıt Üniversitesi, Robotik Uygulama ve Geliştirme Kulübü (RUGK) seçkin bir meslek olan mühendisliğe ulaşma yolunda teorik bilginin yanında uygulamalı eğitimden de yararlanarak bireylerin kendilerini geliştirmeleri ve iş hayatında emin adımlarla ilerlemeleri için kurulmuş bir kulüptür. Teknoloji ve bilgi çağında, mühendislik eğitiminin kalitesini arttırmak için çalışmalar yapan kulübümüz sadece mühendislik öğrencilerine değil diğer tüm fakültelere de hitap etmektedir. Yaklaşık 150 üye bulunduran kulübümüz öğrencilerin iş, kariyer ve çeşitli sosyalleşme adına çalışmalar düzenlemektedir. Bu çalışmalarla birlikte yurt içi ve yurt dışı yarışmalara katılarak başarı sağlanması hedeflenmektedir.
             Kulübümüz, bünyesinde çeşitli gruplar ve birimlerle çalışmalara hız kesmeden devam etmektedir.</p>
@@ -40,7 +41,7 @@
             • Proje çalışmalarında işbirliği sağlayarak ekip çalışması becerisini geliştirmek,
             • Kariyer günleri vasıtasıyla katılan konuşmacılar ile öğrencilerimiz arasında bilgi ve tecrübe akışını sağlamak.
             • Yapacağımız projelerle ulusal ve uluslararası alanda başarı kazanmak.</p>
-        
+        </div>
         <%@include file="WEB-INF/altMenu.jsp" %>
     </body>
 </html>

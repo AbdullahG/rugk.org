@@ -12,15 +12,20 @@
         <title>Çıkış</title>
     </head>
     <body>
-        <%@include file="WEB-INF/menu.jsp" %>
 
         <b>
-            <%                request.getSession().invalidate();
-                out.println("Çıkış yaptınız, anasayfaya yönlendiriliyorsunuz..");
-                response.setHeader("Refresh", "2;url=index.jsp"); // 2 sn sonra index.jsp'e yönlendir.
-%>
+            <%           if (request != null && request.getSession() != null) {
+                    request.getSession().invalidate();
+                }%>
+            <h4 align="center">
+                <%                            out.println("Çıkış yaptınız, anasayfaya yönlendiriliyorsunuz..");
+                %>
+            </h4>
+            <%
+                response.setStatus(response.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", "index.jsp");
+            %>
         </b>
 
-        <%@include file="WEB-INF/altMenu.jsp" %>
     </body>
 </html>

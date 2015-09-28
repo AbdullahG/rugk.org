@@ -88,13 +88,12 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kategoriler <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="haberler.jsp">Haberler</a></li>
+                                    <li><a href="duyurular.jsp">Duyurular</a></li>
+                                    <li><a href="ar-ge.jsp">AR-GE</a></li>
+                                    <li><a href="galeri.jsp">Galeri</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    <li><a href="#">Üyelere Özel</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -139,13 +138,13 @@
                         <%
                         } else {
                         %>
-                        <form id="signin" class="navbar-form navbar-right" role="form" action="login.jsp">
+                        <form id="signin" class="navbar-form navbar-right" method="post" role="form" action="login.jsp">
                             <table><tr>
 
 
                                     <td><div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input id="username" class="form-control" name="username" placeholder="E-Posta/Kullanıcı Adı" type="email">                                        
+                                            <input id="username" class="form-control" name="email" placeholder="E-Posta" type="email">                                        
                                         </div>
                                     </td>
                                     <td>&nbsp;

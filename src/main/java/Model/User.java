@@ -5,8 +5,6 @@
  */
 package Model;
 
-import Controller.RepoServiceImp;
-import Controller.RepoService;
 
 /**
  *
@@ -26,7 +24,6 @@ public class User {
     String grade = "";
     String status = "";
     String auth = "";
-    RepoService repoService = new RepoServiceImp();
 
     public String getAuth() {
         return auth;
@@ -34,14 +31,6 @@ public class User {
 
     public void setAuth(String auth) {
         this.auth = auth;
-    }
-
-    public RepoService getRepoService() {
-        return repoService;
-    }
-
-    public void setRepoService(RepoService repoService) {
-        this.repoService = repoService;
     }
 
     public int getID() {
@@ -131,46 +120,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public boolean validate() {
-        if (userName != null && !userName.equals("") && (password != null && !password.equals("") && name != null && !name.equals("")) && (surName != null && !surName.equals(""))
-                && (faculty != null && !faculty.equals("")) && (department != null && !department.equals(""))
-                && (gsm != null && !gsm.equals("")) && (email != null && !email.equals(""))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean checkInput(String input) {
-        if (input.contains("'") || input.contains("\"") || input.contains("<") || input.contains(">") || input.contains("\\") || input.contains("!")
-                || input.contains(" ") || input.contains(";") || input.contains(",") || input.contains("=")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public String registerToDB() {
-        User user = new User();
-        user.setName(name);
-        user.setSurName(surName);
-        user.setEmail(email);
-        user.setGsm(gsm);
-        user.setDepartment(department);
-        user.setFaculty(faculty);
-        user.setGrade(grade);
-        user.setID(ID);
-        user.setUserName(userName);
-        user.setPassword(password);
-        user.setStatus("activeForAWeek");
-        if (repoService.registerUser(user)) {
-            return "Üye olma işleminiz başarıyla tamamlandı.";
-        } else {
-            return "Geçici bir hata oluştu, lütfen daha sonra tekrar deneyin.";
-        }
-
-        //SESSION SET EDILECEK
-    }
-
 }

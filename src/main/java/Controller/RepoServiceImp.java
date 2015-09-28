@@ -6,6 +6,8 @@
 package Controller;
 
 import Model.Category;
+import Model.Faculty;
+import Model.Faculty.Department;
 import Model.Post;
 import Model.User;
 import java.sql.Connection;
@@ -14,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +36,7 @@ public class RepoServiceImp implements RepoService {
  // 
         Connection conn = null;
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url + dbName+"?useUnicode=true&characterEncoding=UTF-8", username, password);
 
         } catch (Exception e) {
@@ -78,7 +80,6 @@ public class RepoServiceImp implements RepoService {
                 user.setID(resultSet.getInt("ID"));
                 user.setName(resultSet.getString("name"));
                 user.setSurName(resultSet.getString("surName"));
-                user.setUserName(resultSet.getString("userName"));
                 user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
                 user.setGsm(resultSet.getString("gsm"));
@@ -96,8 +97,8 @@ public class RepoServiceImp implements RepoService {
     }
 
     @Override
-    public User loginUser(String userName, String password) {
-        String query = "SELECT * FROM rugk.users WHERE (userName='" + userName + "' OR email='" + userName + "') AND password='" + password + "'";
+    public User loginUser(String email, String password) {
+        String query = "SELECT * FROM rugk.users WHERE (email='" + email + "') AND password='" + password + "'";
         ResultSet resultSet = (ResultSet)this.executeQuery(query);
         try {
             if (resultSet.next()) {
@@ -105,7 +106,6 @@ public class RepoServiceImp implements RepoService {
                 user.setID(resultSet.getInt("ID"));
                 user.setName(resultSet.getString("name"));
                 user.setSurName(resultSet.getString("surName"));
-                user.setUserName(resultSet.getString("userName"));
                 user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
                 user.setGsm(resultSet.getString("gsm"));
@@ -123,8 +123,8 @@ public class RepoServiceImp implements RepoService {
 
     @Override
     public boolean registerUser(User user) {
-        String query="INSERT INTO rugk.users (name, surName, userName, password, email, gsm, faculty, department, grade, status)"+
-                " VALUES ('"+user.getName()+"', '"+user.getSurName()+"', '"+user.getUserName()+"', '"+user.getPassword()+"', '"+user.getEmail()+"', '"+user.getGsm()+"', '"+user.getFaculty()+"', '"+user.getDepartment()+"', '"+user.getGrade()+"', '"+user.getStatus()+"')";
+        String query="INSERT INTO rugk.users (name, surName, password, email, gsm, faculty, department, grade, status)"+
+                " VALUES ('"+user.getName()+"', '"+user.getSurName()+"', '"+user.getPassword()+"', '"+user.getEmail()+"', '"+user.getGsm()+"', '"+user.getFaculty()+"', '"+user.getDepartment()+"', '"+user.getGrade()+"', '"+user.getStatus()+"')";
         if((int)executeQuery(query)>0)
             return true;
         else
@@ -157,7 +157,6 @@ public class RepoServiceImp implements RepoService {
                 categoryList.add(tempCategory);
             }
         } catch (SQLException ex) {
-            System.out.println("BURADA");
             ex.printStackTrace();
             Logger.getLogger(RepoServiceImp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,6 +171,47 @@ public class RepoServiceImp implements RepoService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public List<Faculty> getFaculties() {
+        Faculty faculty = null;
+        Faculty.Department department = null;
+        List<Faculty> facultyList=new ArrayList<>();
+        
+        String query="SELECT * FROM rugk.faculties";
+        ResultSet resultSet = (ResultSet)executeQuery(query);
+        
+        try {
+            ResultSet innerRS;
+            while(resultSet.next())
+            {
+                faculty = new Faculty();
+                faculty.setFacultyID(resultSet.getInt("faculty_id"));
+                faculty.setFacultyName(resultSet.getString("faculty_name"));
+                
+                query = "SELECT * FROM rugk.departments WHERE departments.department_faculty_id="+faculty.getFacultyID();
+                innerRS = (ResultSet)executeQuery(query);
+                
+                ArrayList<Department> departmentList = new ArrayList<>();
+                while(innerRS.next())
+                {
+                    department = faculty.new Department();
+                    
+                    department.setDepartmentID(innerRS.getInt("department_id"));
+                    department.setDepartmentName(innerRS.getString("department_name"));
+                    department.setFacultyID(innerRS.getInt("department_faculty_id"));
+                    
+                    departmentList.add(department);
+                }
+                
+                faculty.setDepartmentList(departmentList);
+                facultyList.add(faculty);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RepoServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return facultyList;
     }
 
 }
